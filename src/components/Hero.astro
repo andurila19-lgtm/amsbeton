@@ -1,0 +1,100 @@
+---
+import { COMPANY_INFO } from '../data/company';
+import { ArrowRight, MessageSquare, ArrowUpRight } from 'lucide-astro';
+
+const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURIComponent(COMPANY_INFO.whatsappMessage)}`;
+---
+
+<section id="beranda" class="relative min-h-[85vh] lg:min-h-[96vh] flex items-center pt-20 pb-10 lg:pt-36 lg:pb-20 overflow-hidden bg-slate-950">
+  
+  <div class="absolute inset-0 z-0">
+    <img 
+      src="/images/hero-rebar-construction.jpg" 
+      alt="Pengecoran Beton Ready Mix CV Anugerah Mecca Sejahtera" 
+      class="w-full h-full object-cover object-center filter brightness-[0.42] contrast-[1.12]"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-slate-950/60"></div>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <div class="max-w-4xl">
+      
+      <div class="inline-flex items-center space-x-2 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-300 mb-3">
+        <span class="w-2 h-2 rounded-full bg-safety-500"></span>
+        <span>Supplier Beton Cor Ready Mix & Sewa Pompa Beton</span>
+      </div>
+
+      <h1 class="text-2xl sm:text-3xl lg:text-5xl font-extrabold text-white leading-tight tracking-tight mb-4">
+        Pondasi Kokoh.<br />
+        Pasokan <span class="text-safety-500">Beton Ready Mix</span><br />
+        Terstandarisasi SNI.
+      </h1>
+
+      <p class="text-sm sm:text-base lg:text-lg text-slate-200 leading-relaxed mb-6 max-w-2xl">
+        CV Anugerah Mecca Sejahtera memasok beton cor mutu K-175 hingga K-350 langsung dari batching plant ke lokasi proyek Anda di Jabodetabek dan Karawang.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4 mb-8 lg:mb-16">
+        <a
+          href="#penawaran"
+          class="inline-flex items-center justify-center space-x-2 px-5 py-3 sm:px-8 sm:py-4 rounded-md bg-safety-600 hover:bg-safety-700 text-white font-bold text-xs sm:text-sm tracking-wide shadow-lg shadow-safety-600/30 transition-colors"
+        >
+          <span>Minta Penawaran Harga</span>
+          <ArrowRight class="w-3.5 h-3.5" />
+        </a>
+
+        <a
+          href={waLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center space-x-2 px-5 py-3 sm:px-8 sm:py-4 rounded-md bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm tracking-wide border border-white/20 transition-colors"
+        >
+          <MessageSquare class="w-3.5 h-3.5 text-emerald-400" />
+          <span>Konsultasi WhatsApp</span>
+        </a>
+      </div>
+
+      <!-- Trust badges -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div class="p-3.5 sm:p-5 rounded-lg bg-slate-900/60 border border-white/10 text-white">
+          <div class="text-[11px] font-bold uppercase tracking-wider text-safety-400 mb-1">Katalog Mutu K-175 — K-350</div>
+          <p class="text-[11px] sm:text-xs text-slate-300 leading-relaxed">
+            Formula agregat terstandarisasi SNI 2847:2019 dengan pengujian kuat tekan 28 hari.
+          </p>
+        </div>
+        <div class="p-3.5 sm:p-5 rounded-lg bg-slate-900/60 border border-white/10 text-white">
+          <div class="text-[11px] font-bold uppercase tracking-wider text-safety-400 mb-1">Armada Standar & MiniMix</div>
+          <p class="text-[11px] sm:text-xs text-slate-300 leading-relaxed">
+            Truk 7 m³ untuk jalan lebar dan MiniMix 3 m³ untuk gang sempit 2.5 meter.
+          </p>
+        </div>
+        <div class="p-3.5 sm:p-5 rounded-lg bg-slate-900/60 border border-white/10 text-white">
+          <div class="text-[11px] font-bold uppercase tracking-wider text-safety-400 mb-1">Survey Lokasi & Estimasi</div>
+          <p class="text-[11px] sm:text-xs text-slate-300 leading-relaxed">
+            Transparansi kubikasi, uji slump 12±2 cm di lokasi, jadwal pengiriman terencana.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Sub-Hero Credibility Ribbon -->
+<section class="bg-white border-b border-slate-200 py-6 sm:py-10 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+    <div>
+      <h2 class="text-lg sm:text-xl lg:text-2xl font-extrabold text-slate-900 tracking-tight">
+        Dipercaya Kontraktor, Pengembang, & Pemilik Rumah
+      </h2>
+    </div>
+    <div class="flex flex-wrap items-center gap-2 text-[11px] sm:text-xs font-bold text-slate-700">
+      <span class="px-3 py-1.5 rounded-md bg-slate-100 border border-slate-200">SNI 2847:2019</span>
+      <span class="px-3 py-1.5 rounded-md bg-slate-100 border border-slate-200">PBI 1971</span>
+      <span class="px-3 py-1.5 rounded-md bg-slate-100 border border-slate-200">ASTM C94</span>
+      <span class="px-3 py-1.5 rounded-md bg-slate-100 border border-slate-200">24 Jam</span>
+    </div>
+  </div>
+</section>

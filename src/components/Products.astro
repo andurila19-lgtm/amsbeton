@@ -1,0 +1,183 @@
+---
+import { CONCRETE_GRADES, COMPANY_INFO } from '../data/company';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-astro';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+---
+
+<section id="mutu-beton" class="py-12 sm:py-16 lg:py-24 bg-industrial-950 text-white overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header & Controls -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8 gap-4">
+      <div class="max-w-3xl">
+        <h2 class="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-white mb-2">
+          Katalog Mutu Beton Ready Mix
+        </h2>
+        <p class="text-xs sm:text-sm lg:text-base text-industrial-300 leading-relaxed">
+          Geser untuk memilih mutu beton cor standar SNI 2847:2019 dari non-struktural hingga beban berat.
+        </p>
+      </div>
+
+      <!-- Swiper Controls -->
+      <div class="flex items-center space-x-2 shrink-0">
+        <button 
+          id="products-prev" 
+          class="w-9 h-9 sm:w-10 sm:h-10 rounded-md border border-industrial-700 bg-industrial-900 hover:bg-industrial-800 active:bg-industrial-700 text-white flex items-center justify-center transition-colors focus:outline-none"
+          aria-label="Mutu sebelumnya"
+        >
+          <ChevronLeft class="w-5 h-5" />
+        </button>
+        <button 
+          id="products-next" 
+          class="w-9 h-9 sm:w-10 sm:h-10 rounded-md border border-industrial-700 bg-industrial-900 hover:bg-industrial-800 active:bg-industrial-700 text-white flex items-center justify-center transition-colors focus:outline-none"
+          aria-label="Mutu berikutnya"
+        >
+          <ChevronRight class="w-5 h-5" />
+        </button>
+      </div>
+    </div>
+
+    <!-- Engineering Guidance Note -->
+    <div class="mb-6 p-3.5 sm:p-5 bg-industrial-900 rounded-lg border border-industrial-800">
+      <div class="text-xs sm:text-sm font-bold text-white mb-1">Panduan Notasi Mutu</div>
+      <p class="text-xs text-industrial-300 leading-relaxed">
+        K = kuat tekan kubus 15×15 cm pada umur 28 hari (kg/cm²). fc' = konversi silinder (MPa). Slump standar 12 ± 2 cm.
+      </p>
+    </div>
+
+    <!-- Swiper Container -->
+    <div class="swiper products-swiper !pb-10">
+      <div class="swiper-wrapper">
+        {CONCRETE_GRADES.map((item) => (
+          <div class="swiper-slide h-auto">
+            <div class="h-full bg-industrial-900 border border-industrial-800 rounded-lg p-4 sm:p-5 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-xl sm:text-2xl font-bold text-safety-500">{item.grade}</span>
+                  <span class="text-[11px] font-semibold px-2 py-0.5 bg-industrial-800 text-industrial-200 rounded border border-industrial-700">{item.category}</span>
+                </div>
+
+                <h3 class="text-sm sm:text-base font-bold text-white mb-2">{item.name}</h3>
+
+                <div class="grid grid-cols-2 gap-2 my-3 p-2.5 bg-industrial-950 rounded text-xs">
+                  <div>
+                    <span class="text-industrial-400 block text-[11px]">Kuat Tekan Kubus</span>
+                    <span class="text-white font-bold text-xs sm:text-sm">{item.strengthKg}</span>
+                  </div>
+                  <div>
+                    <span class="text-industrial-400 block text-[11px]">Standar Silinder</span>
+                    <span class="text-white font-bold text-xs sm:text-sm">{item.strengthMpa}</span>
+                  </div>
+                </div>
+
+                <p class="text-xs text-industrial-300 leading-relaxed mb-3">{item.description}</p>
+
+                <div class="space-y-1 mb-4">
+                  <span class="text-xs font-bold text-white block mb-1">Aplikasi Rekomendasi:</span>
+                  {item.recommendedFor.map((app) => (
+                    <div class="text-xs text-industrial-300 leading-normal">
+                      <span class="text-safety-500 mr-1.5">•</span>{app}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div class="pt-3 border-t border-industrial-800/80 flex items-center justify-between">
+                <span class="text-xs text-industrial-400">Slump: {item.slump}</span>
+                <a
+                  href="#penawaran"
+                  class="select-grade-btn px-3 py-1.5 bg-safety-600 hover:bg-safety-700 text-white text-xs font-bold rounded transition-colors inline-flex items-center space-x-1"
+                  data-grade={item.grade}
+                >
+                  <span>Pilih Mutu</span>
+                  <ArrowRight class="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Pagination -->
+      <div class="swiper-pagination products-pagination !bottom-0"></div>
+    </div>
+
+    <!-- Admixture Assistance Banner -->
+    <div class="mt-6 p-4 sm:p-6 bg-industrial-900 border border-industrial-800 rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div class="space-y-1">
+        <h3 class="text-sm sm:text-base font-bold text-white">Butuh Formula Campuran Khusus (Admixture)?</h3>
+        <p class="text-xs text-industrial-300 leading-relaxed">
+          Tersedia retarder (cuaca panas), accelerator (pengerasan cepat), dan waterproofing sesuai kebutuhan lapangan.
+        </p>
+      </div>
+      <a
+        href={`https://wa.me/${COMPANY_INFO.whatsappNumber}?text=Halo%20AMS%20Beton,%20saya%20butuh%20konsultasi%20mix%20design%20spesifikasi%20khusus.`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="shrink-0 px-4 py-2.5 bg-safety-600 hover:bg-safety-700 text-white text-xs font-bold rounded transition-colors inline-flex items-center space-x-1.5"
+      >
+        <span>Konsultasi Mix Design</span>
+        <ArrowRight class="w-3.5 h-3.5" />
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  :global(.products-swiper .swiper-pagination-bullet) {
+    background: #475569;
+    opacity: 1;
+    width: 8px;
+    height: 8px;
+    transition: all 0.2s ease;
+  }
+  :global(.products-swiper .swiper-pagination-bullet-active) {
+    background: #ea580c !important;
+    width: 24px;
+    border-radius: 4px;
+  }
+</style>
+
+<script>
+  import Swiper from 'swiper';
+  import { Navigation, Pagination } from 'swiper/modules';
+
+  new Swiper('.products-swiper', {
+    modules: [Navigation, Pagination],
+    slidesPerView: 1,
+    spaceBetween: 14,
+    grabCursor: true,
+    pagination: {
+      el: '.products-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '#products-next',
+      prevEl: '#products-prev',
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 2,
+        spaceBetween: 18,
+      },
+      1024: {
+        slidesPerView: 3,
+        spaceBetween: 20,
+      },
+    },
+  });
+
+  const gradeButtons = document.querySelectorAll('.select-grade-btn');
+  gradeButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const grade = (btn as HTMLElement).dataset.grade;
+      if (grade) {
+        const select = document.getElementById('concrete-grade-select') as HTMLSelectElement | null;
+        if (select) { select.value = grade; }
+      }
+    });
+  });
+</script>

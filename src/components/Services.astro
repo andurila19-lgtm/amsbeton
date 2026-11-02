@@ -1,0 +1,83 @@
+---
+import { SERVICES } from '../data/company';
+import { ArrowRight } from 'lucide-astro';
+---
+
+<section id="layanan" class="py-12 sm:py-16 lg:py-24 bg-white text-industrial-950 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="max-w-3xl mb-6 sm:mb-10">
+      <h2 class="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-industrial-950 mb-3">
+        Layanan Pasokan Beton & Sewa Pompa
+      </h2>
+      <p class="text-sm sm:text-base text-industrial-700 leading-relaxed">
+        Armada mixer dan concrete pump lengkap untuk skala industri hingga gang sempit pemukiman.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 mb-8 sm:mb-16">
+      {SERVICES.map((srv) => (
+        <div class="p-4 sm:p-6 lg:p-8 bg-industrial-50 flex flex-col justify-between">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-industrial-950 mb-2">{srv.title}</h3>
+            <p class="text-xs sm:text-sm text-industrial-700 leading-relaxed mb-4">{srv.fullDesc}</p>
+
+            <div class="space-y-1.5">
+              <span class="text-xs font-bold text-industrial-950 block mb-1">Spesifikasi:</span>
+              {srv.specs.map((spec) => (
+                <div class="text-xs text-industrial-700 leading-normal">
+                  <span class="text-safety-600 mr-1.5">•</span>{spec}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="pt-4 mt-4">
+            <a href="#penawaran" class="inline-flex items-center space-x-1.5 text-xs font-bold text-safety-600 hover:text-safety-700 transition-colors">
+              <span>Konsultasikan Proyek Ini</span>
+              <ArrowRight class="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Fleet Comparison Table -->
+    <div class="p-4 sm:p-6 lg:p-8 bg-industrial-950 text-white overflow-hidden">
+      <div class="mb-4">
+        <h3 class="text-base sm:text-lg font-bold text-white mb-1">Perbandingan Truk Mixer</h3>
+        <p class="text-xs text-industrial-300 leading-relaxed">Pilih armada sesuai akses jalan dan kapasitas proyek.</p>
+      </div>
+
+      <div class="overflow-x-auto -mx-4 sm:mx-0">
+        <table class="w-full text-left text-xs sm:text-sm border-collapse min-w-[500px]">
+          <thead>
+            <tr class="text-industrial-400 text-[11px] sm:text-xs">
+              <th class="py-2.5 px-3 bg-industrial-900">Parameter</th>
+              <th class="py-2.5 px-3 bg-industrial-900 text-safety-500 font-bold">Standar (7m³)</th>
+              <th class="py-2.5 px-3 bg-industrial-900 text-emerald-400 font-bold">MiniMix (3m³)</th>
+            </tr>
+          </thead>
+          <tbody class="text-industrial-200">
+            <tr>
+              <td class="py-2.5 px-3 text-industrial-400 bg-industrial-950">Lebar Jalan Min.</td>
+              <td class="py-2.5 px-3 bg-industrial-950">≥ 3.5 meter</td>
+              <td class="py-2.5 px-3 bg-industrial-950">2.5 - 3.0 meter</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 text-industrial-400 bg-industrial-900/60">Berat Total (GVW)</td>
+              <td class="py-2.5 px-3 bg-industrial-900/60">± 25 Ton</td>
+              <td class="py-2.5 px-3 bg-industrial-900/60">± 12 Ton</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 text-industrial-400 bg-industrial-950">Cocok Untuk</td>
+              <td class="py-2.5 px-3 bg-industrial-950">Jalan raya, gedung, gudang</td>
+              <td class="py-2.5 px-3 bg-industrial-950">Cor dak rumah, gang padat</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>

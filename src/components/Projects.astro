@@ -1,0 +1,159 @@
+---
+import { PROJECTS } from '../data/company';
+import { ArrowRight, MapPin, ChevronLeft, ChevronRight } from 'lucide-astro';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+---
+
+<section id="proyek" class="py-12 sm:py-16 lg:py-24 bg-white text-industrial-950 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header & Controls -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8 gap-4">
+      <div class="max-w-3xl">
+        <h2 class="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-industrial-950 mb-2">
+          Dokumentasi Pekerjaan Lapangan
+        </h2>
+        <p class="text-xs sm:text-sm lg:text-base text-industrial-700 leading-relaxed max-w-prose">
+          Geser untuk melihat penerapan mutu beton AMS Beton pada jalan industri, gudang, ruko komersial, dan perumahan.
+        </p>
+      </div>
+
+      <!-- Swiper Navigation Buttons -->
+      <div class="flex items-center space-x-2 shrink-0">
+        <button 
+          id="project-prev" 
+          class="w-9 h-9 sm:w-10 sm:h-10 rounded-md border border-industrial-300 bg-white hover:bg-industrial-100 active:bg-industrial-200 text-industrial-800 flex items-center justify-center transition-colors focus:outline-none"
+          aria-label="Slide sebelumnya"
+        >
+          <ChevronLeft class="w-5 h-5" />
+        </button>
+        <button 
+          id="project-next" 
+          class="w-9 h-9 sm:w-10 sm:h-10 rounded-md border border-industrial-300 bg-white hover:bg-industrial-100 active:bg-industrial-200 text-industrial-800 flex items-center justify-center transition-colors focus:outline-none"
+          aria-label="Slide berikutnya"
+        >
+          <ChevronRight class="w-5 h-5" />
+        </button>
+      </div>
+    </div>
+
+    <!-- Swiper Container -->
+    <div class="swiper projects-swiper !pb-10">
+      <div class="swiper-wrapper">
+        {PROJECTS.map((proj) => (
+          <div class="swiper-slide h-auto">
+            <div class="h-full bg-industrial-50 border border-industrial-200/80 rounded-lg flex flex-col justify-between overflow-hidden">
+              <div>
+                <div class="relative h-48 sm:h-56 lg:h-64 overflow-hidden bg-industrial-200">
+                  <img 
+                    src={proj.image} 
+                    alt={proj.title} 
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                  <div class="absolute top-3 left-3">
+                    <span class="px-2.5 py-1 bg-industrial-950/90 text-white text-[11px] font-semibold rounded">
+                      {proj.category}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="p-4 sm:p-6">
+                  <div class="flex items-center space-x-1.5 text-xs text-industrial-600 mb-1.5">
+                    <MapPin class="w-3.5 h-3.5 text-safety-600 shrink-0" />
+                    <span>{proj.location}</span>
+                  </div>
+
+                  <h3 class="text-base sm:text-lg font-bold text-industrial-950 mb-2">
+                    {proj.title}
+                  </h3>
+
+                  <p class="text-xs sm:text-sm text-industrial-700 leading-relaxed mb-4">
+                    {proj.description}
+                  </p>
+
+                  <!-- Technical Specification Row -->
+                  <div class="grid grid-cols-2 gap-2 p-3 bg-white rounded border border-industrial-100 text-xs">
+                    <div>
+                      <span class="text-industrial-500 block text-[11px]">Mutu Beton</span>
+                      <span class="font-bold text-industrial-950 text-xs sm:text-sm">{proj.concreteGrade}</span>
+                    </div>
+                    <div>
+                      <span class="text-industrial-500 block text-[11px]">Volume</span>
+                      <span class="font-bold text-safety-600 text-xs sm:text-sm">{proj.volume}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="px-4 py-3 sm:px-6 bg-industrial-100/70 border-t border-industrial-200/60 flex items-center justify-between text-xs text-industrial-700">
+                <span class="font-semibold text-industrial-900">Pekerjaan Selesai</span>
+                <a href="#penawaran" class="font-bold text-safety-600 hover:text-safety-700 inline-flex items-center space-x-1">
+                  <span>Konsultasi</span>
+                  <ArrowRight class="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Swiper Pagination Dots -->
+      <div class="swiper-pagination !bottom-0"></div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  :global(.projects-swiper .swiper-pagination-bullet) {
+    background: #cbd5e1;
+    opacity: 1;
+    width: 8px;
+    height: 8px;
+    transition: all 0.2s ease;
+  }
+  :global(.projects-swiper .swiper-pagination-bullet-active) {
+    background: #ea580c !important;
+    width: 24px;
+    border-radius: 4px;
+  }
+</style>
+
+<script>
+  import Swiper from 'swiper';
+  import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+
+  new Swiper('.projects-swiper', {
+    modules: [Navigation, Pagination, Autoplay],
+    slidesPerView: 1,
+    spaceBetween: 16,
+    grabCursor: true,
+    loop: true,
+    autoplay: {
+      delay: 4500,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '#project-next',
+      prevEl: '#project-prev',
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 2,
+        spaceBetween: 20,
+      },
+      1024: {
+        slidesPerView: 2,
+        spaceBetween: 24,
+      },
+    },
+  });
+</script>

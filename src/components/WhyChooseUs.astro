@@ -1,0 +1,59 @@
+---
+import { WHY_CHOOSE_US } from '../data/company';
+import { ArrowRight } from 'lucide-astro';
+---
+
+<section id="keunggulan" class="py-12 sm:py-16 lg:py-24 bg-industrial-900 text-white overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="max-w-3xl mb-6 sm:mb-10">
+      <h2 class="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-white mb-3">
+        Kualitas & Ketepatan Waktu
+      </h2>
+      <p class="text-sm sm:text-base text-industrial-300 leading-relaxed">
+        Kepastian mutu, akurasi takaran, dan kedisiplinan jadwal pengiriman sebagai standar mutlak setiap rit.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-8 sm:mb-12">
+      {WHY_CHOOSE_US.map((item) => (
+        <div class="p-3.5 sm:p-6 bg-industrial-950">
+          <h3 class="text-xs sm:text-sm font-bold text-white mb-2">{item.title}</h3>
+          <p class="text-[11px] sm:text-sm text-industrial-300 leading-relaxed">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="bg-industrial-950 grid grid-cols-1 lg:grid-cols-12 items-center overflow-hidden">
+      <div class="lg:col-span-7 p-5 sm:p-8 lg:p-12 space-y-3">
+        <h3 class="text-lg sm:text-xl font-bold text-white leading-snug">
+          Batas Waktu Pengikatan Dua Jam
+        </h3>
+        <p class="text-xs sm:text-sm text-industrial-300 leading-relaxed">
+          Reaksi hidrasi semen dimulai saat air bertemu semen. Waktu loading hingga penuangan dibatasi maksimal dua jam.
+        </p>
+        <div class="space-y-1.5 text-xs sm:text-sm text-industrial-300">
+          <p>• Uji Slump Cone 12±2 cm sebelum penuangan.</p>
+          <p>• Dilarang menambah air di lokasi tanpa instruksi teknis.</p>
+          <p>• Pembuatan sampel benda uji untuk pengujian lab.</p>
+        </div>
+        <div class="pt-2">
+          <a href="#kontak" class="inline-flex items-center space-x-1.5 px-4 py-2.5 bg-safety-600 hover:bg-safety-700 text-white font-bold text-xs transition-colors">
+            <span>Hubungi Tim Teknis</span>
+            <ArrowRight class="w-3.5 h-3.5" />
+          </a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 relative h-48 sm:h-64 lg:min-h-[340px] overflow-hidden">
+        <img 
+          src="/images/testing-quality.jpg" 
+          alt="Uji slump cone dan kuat tekan beton" 
+          class="w-full h-full object-cover brightness-90 contrast-105"
+          loading="lazy"
+        />
+      </div>
+    </div>
+
+  </div>
+</section>

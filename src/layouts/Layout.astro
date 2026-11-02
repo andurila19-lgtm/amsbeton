@@ -1,0 +1,150 @@
+---
+import { COMPANY_INFO } from '../data/company';
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  image?: string;
+}
+
+const {
+  title = "AMS Beton - Solusi Beton Ready Mix & Concrete Pump | CV Anugerah Mecca Sejahtera",
+  description = "CV Anugerah Mecca Sejahtera (AMS Beton) melayani pemesanan beton cor ready mix standar SNI K-175 hingga K-350, armada standar 7m³, MiniMix 3m³, dan sewa pompa beton di Jabodetabek dan Karawang.",
+  keywords = "beton ready mix, jayamix, ams beton, cv anugerah mecca sejahtera, harga beton cor, mutu k 225, mutu k 250, mutu k 300, cor dak rumah, minimix, molen mini, concrete pump, sewa pompa beton",
+  image = "/images/hero-rebar-construction.jpg"
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://amsbeton.co.id');
+const siteName = "AMS Beton - CV Anugerah Mecca Sejahtera";
+
+const schemaOrg = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://amsbeton.co.id/#organization",
+      "name": "CV Anugerah Mecca Sejahtera (AMS Beton)",
+      "legalName": "CV Anugerah Mecca Sejahtera",
+      "alternateName": "AMS Beton Ready Mix",
+      "url": "https://amsbeton.co.id",
+      "logo": "https://amsbeton.co.id/images/hero-rebar-construction.jpg",
+      "image": "https://amsbeton.co.id/images/hero-rebar-construction.jpg",
+      "description": description,
+      "telephone": COMPANY_INFO.phoneFormatted,
+      "email": COMPANY_INFO.email,
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Kawasan Industri & Pergudangan Terpadu",
+        "addressLocality": "Bekasi",
+        "addressRegion": "Jawa Barat",
+        "addressCountry": "ID"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -6.2383,
+        "longitude": 106.9756
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "07:30",
+          "closes": "17:30"
+        }
+      ],
+      "areaServed": [
+        "Jakarta", "Bekasi", "Cikarang", "Tangerang", "Bogor", "Depok", "Karawang"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://amsbeton.co.id/#website",
+      "url": "https://amsbeton.co.id",
+      "name": siteName,
+      "publisher": {
+        "@id": "https://amsbeton.co.id/#organization"
+      }
+    }
+  ]
+};
+---
+
+<!doctype html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="CV Anugerah Mecca Sejahtera" />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, canonicalURL)} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content="id_ID" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, canonicalURL)} />
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />
+
+    <style is:global>
+      :root {
+        --color-safety: #ea580c;
+        --color-dark: #0b0f17;
+      }
+      
+      body {
+        font-family: 'Inter', system-ui, sans-serif;
+        color: #111827;
+        background-color: #f8fafc;
+        overflow-x: hidden;
+      }
+
+      .font-display {
+        font-family: 'Inter', system-ui, sans-serif;
+        letter-spacing: -0.02em;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0b0f17;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #374151;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #ea580c;
+      }
+    </style>
+  </head>
+  <body class="bg-slate-50 text-slate-900 antialiased selection:bg-safety-600 selection:text-white">
+    <slot />
+  </body>
+</html>

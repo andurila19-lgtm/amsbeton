@@ -1,0 +1,111 @@
+---
+import { SERVICE_AREAS, COMPANY_INFO } from '../data/company';
+import { ArrowRight, MapPin } from 'lucide-astro';
+---
+
+<section id="area-layanan" class="py-12 sm:py-16 lg:py-24 bg-industrial-50 text-industrial-950 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header -->
+    <div class="max-w-3xl mb-6 sm:mb-10">
+      <h2 class="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-industrial-950 mb-2">
+        Area Layanan & Radius Pengiriman
+      </h2>
+      <p class="text-xs sm:text-sm lg:text-base text-industrial-700 leading-relaxed max-w-prose">
+        Jangkauan dioptimalkan dalam radius maksimal dua jam dari unit batching plant terdekat agar slump beton tetap terjaga.
+      </p>
+    </div>
+
+    <!-- Coverage Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
+      {SERVICE_AREAS.map((area) => (
+        <div class="p-4 sm:p-6 bg-white border border-industrial-200/80 rounded-lg flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-base sm:text-lg font-bold text-industrial-950">
+                {area.city}
+              </h3>
+              <span class="px-2 py-0.5 bg-industrial-100 text-industrial-800 text-[11px] font-semibold rounded">
+                {area.radius}
+              </span>
+            </div>
+
+            <div class="flex flex-wrap gap-1.5 mb-3">
+              {area.coverage.map((sub) => (
+                <span class="px-2 py-0.5 bg-industrial-50 text-industrial-700 border border-industrial-200/50 text-[11px] rounded">
+                  {sub}
+                </span>
+              ))}
+            </div>
+
+            <p class="text-xs sm:text-sm text-industrial-600 leading-relaxed pt-1">
+              {area.features}
+            </p>
+          </div>
+
+          <div class="pt-4 mt-3 border-t border-industrial-100 flex items-center justify-between text-xs">
+            <span class="text-emerald-700 font-semibold text-[11px]">Siap Kirim</span>
+            <a
+              href={`https://wa.me/${COMPANY_INFO.whatsappNumber}?text=Halo%20AMS%20Beton,%20apakah%20lokasi%20saya%20di%20${encodeURIComponent(area.city)}%20terjangkau%20pengiriman?`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-bold text-safety-600 hover:text-safety-700 transition-colors inline-flex items-center space-x-1"
+            >
+              <span>Cek Rute</span>
+              <ArrowRight class="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+      ))}
+
+      <!-- Batching Plant Units Card -->
+      <div class="p-4 sm:p-6 bg-industrial-950 text-white rounded-lg flex flex-col justify-between">
+        <div>
+          <h3 class="text-base sm:text-lg font-bold text-white mb-2 flex items-center space-x-2">
+            <MapPin class="w-4 h-4 text-safety-500" />
+            <span>Unit Batching Plant</span>
+          </h3>
+
+          <p class="text-xs text-industrial-300 leading-relaxed mb-3">
+            Armada dialokasikan dari batching plant terdekat:
+          </p>
+
+          <div class="space-y-2 text-xs text-industrial-300">
+            {COMPANY_INFO.batchingPlantLocations.map((plant) => (
+              <div class="p-2.5 bg-industrial-900 border border-industrial-800 rounded text-xs">
+                {plant}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="pt-3 mt-3 text-[11px] text-industrial-400 border-t border-industrial-800">
+          Tersedia pengiriman malam hari untuk antisipasi jam ganjil-genap dan macet.
+        </div>
+      </div>
+    </div>
+
+    <!-- Survey Access Banner -->
+    <div class="p-4 sm:p-6 lg:p-8 bg-white border border-industrial-200 rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div class="space-y-1 max-w-2xl">
+        <h3 class="text-sm sm:text-base font-bold text-industrial-950">
+          Layanan Survey Akses Jalan & Lokasi Proyek
+        </h3>
+        <p class="text-xs sm:text-sm text-industrial-600 leading-relaxed">
+          Pengecekan lebar gang, kabel melintang, kekuatan jembatan, dan parkir armada mixer / concrete pump gratis sebelum pengecoran.
+        </p>
+      </div>
+
+      <a
+        href={`https://wa.me/${COMPANY_INFO.whatsappNumber}?text=Halo%20AMS%20Beton,%20saya%20ingin%20request%20survey%20lokasi%20akses%20jalan%20proyek.`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="shrink-0 px-4 py-2.5 bg-industrial-950 hover:bg-industrial-850 text-white font-bold text-xs rounded transition-colors inline-flex items-center space-x-2"
+      >
+        <span>Jadwalkan Survey</span>
+        <ArrowRight class="w-3.5 h-3.5 text-safety-500" />
+      </a>
+    </div>
+
+  </div>
+</section>

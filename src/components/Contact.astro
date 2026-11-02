@@ -1,0 +1,409 @@
+---
+import { COMPANY_INFO, CONCRETE_GRADES } from '../data/company';
+import { Phone, Mail, MapPin, Clock, MessageSquare, Calculator } from 'lucide-astro';
+
+const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURIComponent(COMPANY_INFO.whatsappMessage)}`;
+---
+
+<section id="kontak" class="py-12 sm:py-16 lg:py-24 bg-white text-industrial-950 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- CTA Banner -->
+    <div class="mb-10 sm:mb-14 bg-safety-600 text-white p-5 sm:p-8 lg:p-10 rounded-lg">
+      <div class="max-w-3xl">
+        <h2 class="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-white mb-2 sm:mb-3">
+          Konsultasi Kebutuhan Pengecoran
+        </h2>
+        <p class="text-xs sm:text-sm lg:text-base text-white/95 leading-relaxed mb-5 max-w-prose">
+          Diskusikan spesifikasi mutu beton, estimasi kubikasi, dan jadwal pengecoran langsung bersama tim technical sales CV Anugerah Mecca Sejahtera.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4">
+          <a
+            href={waLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-5 py-3 bg-industrial-950 hover:bg-industrial-900 text-white font-bold text-xs sm:text-sm rounded flex items-center justify-center space-x-2 transition-colors"
+          >
+            <MessageSquare class="w-4 h-4 text-emerald-400" />
+            <span>Chat via WhatsApp</span>
+          </a>
+
+          <a
+            href={`tel:${COMPANY_INFO.phone}`}
+            class="px-5 py-3 bg-white hover:bg-industrial-100 text-industrial-950 font-bold text-xs sm:text-sm rounded flex items-center justify-center space-x-2 transition-colors"
+          >
+            <Phone class="w-4 h-4 text-safety-600" />
+            <span>{COMPANY_INFO.phoneFormatted}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Heading for Form & Calculator -->
+    <div id="penawaran" class="max-w-3xl mb-6 sm:mb-10 scroll-mt-20">
+      <h2 class="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-industrial-950 mb-2">
+        Kalkulator Kubikasi & Penawaran
+      </h2>
+      <p class="text-xs sm:text-sm lg:text-base text-industrial-700 leading-relaxed max-w-prose">
+        Hitung volume beton cor yang diperlukan dan buat rincian penawaran harga resmi.
+      </p>
+    </div>
+
+    <!-- Main Grid: Calculator & Form (Left) & Contact Details (Right) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10">
+      
+      <!-- Interactive Calculator & Form -->
+      <div class="lg:col-span-7 bg-industrial-50 p-4 sm:p-6 lg:p-8 rounded-lg border border-industrial-200/80">
+        
+        <!-- Calculator Box -->
+        <div class="mb-6 pb-6 border-b border-industrial-200">
+          <div class="flex items-center space-x-2 text-industrial-950 mb-1.5">
+            <Calculator class="w-4 h-4 text-safety-600" />
+            <h3 class="text-sm sm:text-base font-bold">Kalkulator Kubikasi Beton</h3>
+          </div>
+          <p class="text-[11px] sm:text-xs text-industrial-600 mb-3">
+            Rumus: Panjang (m) × Lebar (m) × Tebal (m) = Volume (m³).
+          </p>
+
+          <div class="grid grid-cols-3 gap-2 sm:gap-3">
+            <div>
+              <label for="calc-length" class="block text-[11px] font-bold text-industrial-700">Panjang (m)</label>
+              <input 
+                type="number" 
+                id="calc-length" 
+                step="0.1" 
+                min="0" 
+                placeholder="10" 
+                value="10"
+                class="mt-1 w-full px-2.5 py-1.5 sm:py-2 bg-white border border-industrial-300 rounded text-xs sm:text-sm font-semibold text-industrial-950 focus:outline-none focus:border-safety-600"
+              />
+            </div>
+            <div>
+              <label for="calc-width" class="block text-[11px] font-bold text-industrial-700">Lebar (m)</label>
+              <input 
+                type="number" 
+                id="calc-width" 
+                step="0.1" 
+                min="0" 
+                placeholder="6" 
+                value="6"
+                class="mt-1 w-full px-2.5 py-1.5 sm:py-2 bg-white border border-industrial-300 rounded text-xs sm:text-sm font-semibold text-industrial-950 focus:outline-none focus:border-safety-600"
+              />
+            </div>
+            <div>
+              <label for="calc-thick" class="block text-[11px] font-bold text-industrial-700">Tebal (m)</label>
+              <input 
+                type="number" 
+                id="calc-thick" 
+                step="0.01" 
+                min="0" 
+                placeholder="0.12" 
+                value="0.12"
+                class="mt-1 w-full px-2.5 py-1.5 sm:py-2 bg-white border border-industrial-300 rounded text-xs sm:text-sm font-semibold text-industrial-950 focus:outline-none focus:border-safety-600"
+              />
+            </div>
+          </div>
+
+          <!-- Dynamic Results -->
+          <div class="mt-3 p-3.5 sm:p-4 bg-industrial-950 text-white rounded flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4">
+            <div>
+              <div class="flex items-baseline space-x-1.5">
+                <span id="calc-result-volume" class="text-2xl sm:text-3xl font-extrabold text-safety-500">7.20</span>
+                <span class="text-xs sm:text-sm font-bold text-white">m³ Volume Estimasi</span>
+              </div>
+              <span class="text-[11px] text-industrial-400 block">
+                Disarankan toleransi margin 3% — 5%
+              </span>
+            </div>
+
+            <div class="text-[11px] sm:text-xs text-industrial-300 space-y-0.5">
+              <div>Truk Standar: <strong id="calc-standard-trucks" class="text-white">2 Rit (7m³)</strong></div>
+              <div>Truk MiniMix: <strong id="calc-minimix-trucks" class="text-white">3 Rit (3m³)</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Official Quotation Form -->
+        <form id="quote-form" class="space-y-3 sm:space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+            <div>
+              <label for="client-name" class="block text-[11px] sm:text-xs font-bold text-industrial-800 mb-1">
+                Nama Pemesan / PIC *
+              </label>
+              <input 
+                type="text" 
+                id="client-name" 
+                required 
+                placeholder="Nama lengkap"
+                class="w-full px-3 py-2 bg-white border border-industrial-300 rounded text-xs sm:text-sm text-industrial-950 focus:outline-none focus:border-safety-600"
+              />
+            </div>
+
+            <div>
+              <label for="client-phone" class="block text-[11px] sm:text-xs font-bold text-industrial-800 mb-1">
+                No. WhatsApp / Telp *
+              </label>
+              <input 
+                type="tel" 
+                id="client-phone" 
+                required 
+                placeholder="08xxxxxxxxxx"
+                class="w-full px-3 py-2 bg-white border border-industrial-300 rounded text-xs sm:text-sm text-industrial-950 focus:outline-none focus:border-safety-600"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+            <div>
+              <label for="concrete-grade-select" class="block text-[11px] sm:text-xs font-bold text-industrial-800 mb-1">
+                Pilihan Mutu Beton *
+              </label>
+              <select 
+                id="concrete-grade-select" 
+                class="w-full px-3 py-2 bg-white border border-industrial-300 rounded text-xs sm:text-sm font-medium text-industrial-950 focus:outline-none focus:border-safety-600"
+              >
+                {CONCRETE_GRADES.map((g) => (
+                  <option value={g.grade} selected={g.grade === 'K-250'}>
+                    {g.grade} - {g.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label for="truck-type-select" class="block text-[11px] sm:text-xs font-bold text-industrial-800 mb-1">
+                Tipe Armada Pengiriman *
+              </label>
+              <select 
+                id="truck-type-select" 
+                class="w-full px-3 py-2 bg-white border border-industrial-300 rounded text-xs sm:text-sm text-industrial-950 focus:outline-none focus:border-safety-600"
+              >
+                <option value="Truk Standar (7 m³)">Truk Standar 7 m³ (Jalan ≥ 3.5m)</option>
+                <option value="Truk MiniMix (3 m³)">Truk MiniMix 3 m³ (Akses 2.5 - 3m)</option>
+                <option value="Perlu Survey Lokasi">Perlu Survey Akses Dahulu</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+            <div>
+              <label for="pump-service" class="block text-[11px] sm:text-xs font-bold text-industrial-800 mb-1">
+                Sewa Pompa Beton (Concrete Pump)
+              </label>
+              <select 
+                id="pump-service" 
+                class="w-full px-3 py-2 bg-white border border-industrial-300 rounded text-xs sm:text-sm text-industrial-950 focus:outline-none focus:border-safety-600"
+              >
+                <option value="Tidak Perlu (Curah Manual)">Tidak Perlu (Curah Manual)</option>
+                <option value="Sewa Pompa Standar (Boom 18m)">Pompa Standar (Boom 18m)</option>
+                <option value="Sewa Pompa Long Boom (Boom 28m)">Pompa Long Boom (Boom 28m)</option>
+                <option value="Sewa Pompa Kodok / Pipa Darat">Pompa Kodok (Pipa Darat 50-150m)</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="project-location" class="block text-[11px] sm:text-xs font-bold text-industrial-800 mb-1">
+                Lokasi Proyek / Kelurahan & Kota *
+              </label>
+              <input 
+                type="text" 
+                id="project-location" 
+                required 
+                placeholder="Kelurahan, Kota"
+                class="w-full px-3 py-2 bg-white border border-industrial-300 rounded text-xs sm:text-sm text-industrial-950 focus:outline-none focus:border-safety-600"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="project-notes" class="block text-[11px] sm:text-xs font-bold text-industrial-800 mb-1">
+              Catatan Proyek
+            </label>
+            <textarea 
+              id="project-notes" 
+              rows="2" 
+              placeholder="Contoh: Rencana pengecoran dak lantai 2 hari Sabtu pagi."
+              class="w-full px-3 py-2 bg-white border border-industrial-300 rounded text-xs sm:text-sm text-industrial-950 focus:outline-none focus:border-safety-600"
+            ></textarea>
+          </div>
+
+          <!-- Buttons -->
+          <div class="pt-2 flex flex-col sm:flex-row items-center gap-2.5">
+            <button
+              type="button"
+              id="btn-send-whatsapp"
+              class="w-full sm:flex-1 py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm rounded flex items-center justify-center space-x-2 transition-colors"
+            >
+              <MessageSquare class="w-4 h-4" />
+              <span>Kirim via WhatsApp</span>
+            </button>
+
+            <button
+              type="button"
+              id="btn-send-email"
+              class="w-full sm:w-auto py-2.5 px-4 bg-industrial-950 hover:bg-industrial-850 text-white font-bold text-xs sm:text-sm rounded flex items-center justify-center space-x-2 transition-colors"
+            >
+              <Mail class="w-4 h-4 text-safety-500" />
+              <span>Format Email</span>
+            </button>
+          </div>
+        </form>
+
+      </div>
+
+      <!-- Company Legal Details & Google Maps -->
+      <div class="lg:col-span-5 space-y-4 sm:space-y-6">
+        
+        <div class="p-4 sm:p-6 bg-industrial-950 text-white rounded-lg space-y-4">
+          <div>
+            <span class="text-[11px] text-safety-500 font-bold block mb-0.5">Badan Hukum Resmi</span>
+            <h3 class="text-lg sm:text-xl font-bold text-white">{COMPANY_INFO.legalName}</h3>
+            <span class="text-xs text-industrial-400 block mt-0.5">Brand Dagang: {COMPANY_INFO.brandName}</span>
+          </div>
+
+          <div class="space-y-3 text-xs sm:text-sm text-industrial-300">
+            <div class="flex items-start space-x-2.5">
+              <Phone class="w-4 h-4 text-safety-500 shrink-0 mt-0.5" />
+              <div>
+                <span class="block text-[11px] text-industrial-400">Telepon & Hotline Pengecoran</span>
+                <a href={`tel:${COMPANY_INFO.phone}`} class="font-bold text-white hover:text-safety-500 transition-colors text-sm">
+                  {COMPANY_INFO.phoneFormatted}
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-2.5">
+              <Mail class="w-4 h-4 text-safety-500 shrink-0 mt-0.5" />
+              <div>
+                <span class="block text-[11px] text-industrial-400">Email Resmi</span>
+                <a href={`mailto:${COMPANY_INFO.email}`} class="font-medium text-white hover:text-safety-500 transition-colors block text-xs">
+                  {COMPANY_INFO.email}
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-2.5">
+              <Clock class="w-4 h-4 text-safety-500 shrink-0 mt-0.5" />
+              <div>
+                <span class="block text-[11px] text-industrial-400">Jam Operasional</span>
+                <p class="text-xs text-industrial-300 leading-relaxed mt-0.5">
+                  {COMPANY_INFO.workingHours}
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-2.5">
+              <MapPin class="w-4 h-4 text-safety-500 shrink-0 mt-0.5" />
+              <div>
+                <span class="block text-[11px] text-industrial-400">Wilayah Layanan</span>
+                <p class="text-xs text-industrial-300 leading-relaxed mt-0.5">
+                  Jabodetabek (Jakarta, Bogor, Depok, Tangerang, Bekasi) dan Karawang.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Google Maps Embed -->
+        <div class="bg-industrial-100 rounded-lg overflow-hidden border border-industrial-200">
+          <div class="p-3 bg-white flex items-center justify-between text-xs font-bold text-industrial-950 border-b border-industrial-100">
+            <div class="flex items-center space-x-1.5">
+              <MapPin class="w-3.5 h-3.5 text-safety-600" />
+              <span>Lokasi Batching Plant & Operasional</span>
+            </div>
+            <span class="text-[11px] text-industrial-500 font-normal">Google Maps</span>
+          </div>
+          
+          <div class="relative h-48 sm:h-56 w-full">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126915.4055276537!2d106.915494!3d-6.241586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698c6900964f6b%3A0x948338e3d922b260!2sBekasi%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid" 
+              class="w-full h-full border-0" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Lokasi Operasional AMS Beton CV Anugerah Mecca Sejahtera"
+            ></iframe>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Volume Calculator Real-Time Script
+  const lengthInput = document.getElementById('calc-length') as HTMLInputElement | null;
+  const widthInput = document.getElementById('calc-width') as HTMLInputElement | null;
+  const thickInput = document.getElementById('calc-thick') as HTMLInputElement | null;
+  const resultVolume = document.getElementById('calc-result-volume');
+  const standardTrucks = document.getElementById('calc-standard-trucks');
+  const minimixTrucks = document.getElementById('calc-minimix-trucks');
+
+  function updateCalculator() {
+    if (!lengthInput || !widthInput || !thickInput || !resultVolume || !standardTrucks || !minimixTrucks) return;
+    
+    let l = parseFloat(lengthInput.value) || 0;
+    let w = parseFloat(widthInput.value) || 0;
+    let t = parseFloat(thickInput.value) || 0;
+
+    if (t > 1) {
+      t = t / 100;
+    }
+
+    const volume = l * w * t;
+    const roundedVolume = volume.toFixed(2);
+    resultVolume.textContent = roundedVolume;
+
+    const stdTrucks = Math.ceil(volume / 7) || 1;
+    const miniTrucks = Math.ceil(volume / 3) || 1;
+
+    standardTrucks.textContent = `${stdTrucks} Rit (7m³)`;
+    minimixTrucks.textContent = `${miniTrucks} Rit (3m³)`;
+  }
+
+  if (lengthInput && widthInput && thickInput) {
+    lengthInput.addEventListener('input', updateCalculator);
+    widthInput.addEventListener('input', updateCalculator);
+    thickInput.addEventListener('input', updateCalculator);
+  }
+
+  // Handle WhatsApp submission button
+  const btnSendWhatsapp = document.getElementById('btn-send-whatsapp');
+  if (btnSendWhatsapp) {
+    btnSendWhatsapp.addEventListener('click', () => {
+      const name = (document.getElementById('client-name') as HTMLInputElement)?.value.trim() || 'Pelanggan';
+      const phone = (document.getElementById('client-phone') as HTMLInputElement)?.value.trim() || '-';
+      const grade = (document.getElementById('concrete-grade-select') as HTMLSelectElement)?.value || 'K-250';
+      const truck = (document.getElementById('truck-type-select') as HTMLSelectElement)?.value || 'Truk Standar';
+      const pump = (document.getElementById('pump-service') as HTMLSelectElement)?.value || '-';
+      const location = (document.getElementById('project-location') as HTMLInputElement)?.value.trim() || '-';
+      const notes = (document.getElementById('project-notes') as HTMLTextAreaElement)?.value.trim() || '-';
+      const volume = document.getElementById('calc-result-volume')?.textContent || '0';
+
+      const message = `Halo AMS Beton (CV Anugerah Mecca Sejahtera),\n\nSaya ingin meminta penawaran harga beton cor ready mix:\n\n- Nama PIC: ${name}\n- No. Kontak: ${phone}\n- Lokasi Proyek: ${location}\n- Mutu Beton: ${grade}\n- Estimasi Volume: ${volume} m³\n- Tipe Armada: ${truck}\n- Sewa Pompa Beton: ${pump}\n- Catatan Tambahan: ${notes}\n\nMohon informasi jadwal pengiriman dan estimasi penawaran harga resmi. Terima kasih.`;
+
+      const targetUrl = `https://wa.me/6281288997600?text=${encodeURIComponent(message)}`;
+      window.open(targetUrl, '_blank');
+    });
+  }
+
+  // Handle Email submission button
+  const btnSendEmail = document.getElementById('btn-send-email');
+  if (btnSendEmail) {
+    btnSendEmail.addEventListener('click', () => {
+      const name = (document.getElementById('client-name') as HTMLInputElement)?.value.trim() || 'Pelanggan';
+      const grade = (document.getElementById('concrete-grade-select') as HTMLSelectElement)?.value || 'K-250';
+      const location = (document.getElementById('project-location') as HTMLInputElement)?.value.trim() || 'Jabodetabek';
+      const volume = document.getElementById('calc-result-volume')?.textContent || '0';
+
+      const subject = `Permintaan Penawaran Beton Cor ${grade} - ${name} (${location})`;
+      const body = `Yth. Tim Penawaran CV Anugerah Mecca Sejahtera (AMS Beton),\n\nMohon dikirimkan surat penawaran harga resmi untuk proyek kami:\n- Nama Pemesan: ${name}\n- Lokasi: ${location}\n- Mutu Beton: ${grade}\n- Estimasi Kebutuhan: ${volume} m³\n\nTerima kasih.`;
+
+      window.location.href = `mailto:penawaran@amsbeton.co.id?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+  }
+</script>
