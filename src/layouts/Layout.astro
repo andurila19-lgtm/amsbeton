@@ -9,9 +9,9 @@ interface Props {
 }
 
 const {
-  title = "AMS Beton - Solusi Beton Ready Mix & Concrete Pump | CV Anugerah Mecca Sejahtera",
-  description = "CV Anugerah Mecca Sejahtera (AMS Beton) melayani pemesanan beton cor ready mix standar SNI K-175 hingga K-350, armada standar 7m³, MiniMix 3m³, dan sewa pompa beton di Jabodetabek dan Karawang.",
-  keywords = "beton ready mix, jayamix, ams beton, cv anugerah mecca sejahtera, harga beton cor, mutu k 225, mutu k 250, mutu k 300, cor dak rumah, minimix, molen mini, concrete pump, sewa pompa beton",
+  title = "AMS Beton - Penyedia Beton Ready Mix & Layanan Pengecoran",
+  description = "CV Anugerah Mecca Sejahtera (AMS Beton) melayani pemesanan beton cor ready mix standar SNI K-175 hingga K-350, armada standar 7 m³, MiniMix 3 m³, dan sewa pompa beton untuk wilayah Jabodetabek dan sekitarnya.",
+  keywords = "beton ready mix, ams beton, cv anugerah mecca sejahtera, harga beton cor, mutu k 225, mutu k 250, mutu k 300, cor dak rumah, minimix, molen mini, concrete pump, sewa pompa beton, jabodetabek",
   image = "/images/hero-rebar-construction.jpg"
 } = Astro.props;
 
@@ -26,25 +26,18 @@ const schemaOrg = {
       "@id": "https://amsbeton.co.id/#organization",
       "name": "CV Anugerah Mecca Sejahtera (AMS Beton)",
       "legalName": "CV Anugerah Mecca Sejahtera",
-      "alternateName": "AMS Beton Ready Mix",
+      "alternateName": "AMS Beton",
       "url": "https://amsbeton.co.id",
       "logo": "https://amsbeton.co.id/images/hero-rebar-construction.jpg",
       "image": "https://amsbeton.co.id/images/hero-rebar-construction.jpg",
       "description": description,
       "telephone": COMPANY_INFO.phoneFormatted,
-      "email": COMPANY_INFO.email,
       "priceRange": "$$",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Kawasan Industri & Pergudangan Terpadu",
-        "addressLocality": "Bekasi",
-        "addressRegion": "Jawa Barat",
+        "streetAddress": COMPANY_INFO.officeAddress,
+        "addressRegion": "Jabodetabek & Jawa Barat",
         "addressCountry": "ID"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": -6.2383,
-        "longitude": 106.9756
       },
       "openingHoursSpecification": [
         {

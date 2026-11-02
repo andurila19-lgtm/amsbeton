@@ -63,16 +63,16 @@ import { ArrowRight, MapPin } from 'lucide-astro';
         <div>
           <h3 class="text-base sm:text-lg font-bold text-white mb-2 flex items-center space-x-2">
             <MapPin class="w-4 h-4 text-safety-500" />
-            <span>Unit Batching Plant</span>
+            <span>Koordinasi Titik Suplai</span>
           </h3>
 
           <p class="text-xs text-industrial-300 leading-relaxed mb-3">
-            Armada dialokasikan dari batching plant terdekat:
+            Titik pengiriman disesuaikan dengan koridor lokasi proyek Anda:
           </p>
 
           <div class="space-y-2 text-xs text-industrial-300">
             {COMPANY_INFO.batchingPlantLocations.map((plant) => (
-              <div class="p-2.5 bg-industrial-900 border border-industrial-800 rounded text-xs">
+              <div class="p-2.5 bg-industrial-900 border border-industrial-800 rounded text-xs leading-relaxed">
                 {plant}
               </div>
             ))}
@@ -80,7 +80,7 @@ import { ArrowRight, MapPin } from 'lucide-astro';
         </div>
 
         <div class="pt-3 mt-3 text-[11px] text-industrial-400 border-t border-industrial-800">
-          Tersedia pengiriman malam hari untuk antisipasi jam ganjil-genap dan macet.
+          Penjadwalan malam hari dapat dikoordinasikan untuk mengantisipasi jalur padat lalu lintas.
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 ---
 import { COMPANY_INFO, CONCRETE_GRADES } from '../data/company';
-import { Phone, Mail, MapPin, MessageSquare, ArrowRight } from 'lucide-astro';
+import { Phone, MapPin, MessageSquare, ArrowRight } from 'lucide-astro';
 
 const currentYear = new Date().getFullYear();
 const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURIComponent(COMPANY_INFO.whatsappMessage)}`;
@@ -28,12 +28,12 @@ const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURICom
         </div>
 
         <p class="text-xs text-industrial-300 leading-relaxed max-w-sm">
-          Penyedia beton cor ready mix dan sewa pompa beton berstandar SNI 2847:2019. Melayani armada standar 7 m³ dan MiniMix 3 m³ di Jabodetabek dan Karawang.
+          Penyedia pasokan beton cor ready mix dan layanan sewa pompa beton dengan acuan standar SNI 2847:2019. Melayani armada truk standar 7 m³ dan MiniMix 3 m³ di Jabodetabek dan sekitarnya.
         </p>
 
         <div class="text-[11px] text-industrial-400 pt-1 space-y-0.5">
-          <div class="text-white font-semibold">Badan Hukum Resmi</div>
-          <div>NIB, SIUP, & Faktur Pajak PKP Lengkap</div>
+          <div class="text-white font-semibold">Badan Hukum Terdaftar</div>
+          <div>{COMPANY_INFO.legalName}</div>
         </div>
       </div>
 
@@ -45,9 +45,9 @@ const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURICom
         <ul class="space-y-1.5 text-xs">
           <li><a href="#beranda" class="hover:text-white transition-colors">Beranda</a></li>
           <li><a href="#tentang-kami" class="hover:text-white transition-colors">Tentang Kami</a></li>
-          <li><a href="#layanan" class="hover:text-white transition-colors">Layanan</a></li>
+          <li><a href="#layanan" class="hover:text-white transition-colors">Layanan Pengecoran</a></li>
           <li><a href="#keunggulan" class="hover:text-white transition-colors">Standar Kualitas</a></li>
-          <li><a href="#proyek" class="hover:text-white transition-colors">Dokumentasi Proyek</a></li>
+          <li><a href="#proyek" class="hover:text-white transition-colors">Referensi Aplikasi</a></li>
           <li><a href="#area-layanan" class="hover:text-white transition-colors">Area Layanan</a></li>
           <li><a href="#penawaran" class="hover:text-white transition-colors">Kalkulator Kubikasi</a></li>
           <li><a href="#kontak" class="hover:text-white transition-colors">Kontak & Pemesanan</a></li>
@@ -57,7 +57,7 @@ const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURICom
       <!-- Concrete Grades Links (lg:col-span-3) -->
       <div class="lg:col-span-3 space-y-2.5">
         <h4 class="text-xs font-bold text-white uppercase tracking-wider">
-          Mutu Beton SNI
+          Mutu Beton Acuan SNI
         </h4>
         <ul class="space-y-1.5 text-xs">
           {CONCRETE_GRADES.map((item) => (
@@ -74,7 +74,7 @@ const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURICom
       <!-- Direct Contact Channels (lg:col-span-3) -->
       <div class="lg:col-span-3 space-y-2.5">
         <h4 class="text-xs font-bold text-white uppercase tracking-wider">
-          Kontak
+          Kontak Layanan
         </h4>
         <div class="space-y-2 text-xs text-industrial-300">
           <p class="flex items-center space-x-2">
@@ -86,29 +86,23 @@ const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURICom
           <p class="flex items-center space-x-2">
             <MessageSquare class="w-3.5 h-3.5 text-emerald-400 shrink-0" />
             <a href={waLink} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors text-emerald-300">
-              WhatsApp Layanan
+              WhatsApp: {COMPANY_INFO.phoneFormatted}
             </a>
           </p>
-          <p class="flex items-center space-x-2">
-            <Mail class="w-3.5 h-3.5 text-safety-500 shrink-0" />
-            <a href={`mailto:${COMPANY_INFO.email}`} class="hover:text-white transition-colors">
-              {COMPANY_INFO.email}
-            </a>
-          </p>
-          <p class="flex items-start space-x-2 text-[11px] text-industrial-400">
+          <p class="flex items-start space-x-2 text-[11px] text-industrial-400 pt-0.5">
             <MapPin class="w-3.5 h-3.5 text-safety-500 shrink-0 mt-0.5" />
-            <span>Batching Plant Jabodetabek & Karawang</span>
+            <span>Jalur Pengiriman Jabodetabek & Karawang</span>
           </p>
         </div>
 
-        <div class="pt-1">
+        <div class="pt-1.5">
           <a
             href={waLink}
             target="_blank"
             rel="noopener noreferrer"
             class="w-full py-2 px-3 bg-industrial-900 hover:bg-industrial-850 text-emerald-300 text-xs font-bold rounded flex items-center justify-center space-x-1.5 transition-colors"
           >
-            <span>Hubungi Dispatcher</span>
+            <span>Konsultasi via WhatsApp</span>
             <ArrowRight class="w-3.5 h-3.5" />
           </a>
         </div>
@@ -119,9 +113,10 @@ const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURICom
     <!-- Bottom Copyright -->
     <div class="pt-6 border-t border-industrial-900 flex flex-col sm:flex-row items-center justify-between text-[11px] text-industrial-400 gap-3">
       <div>
-        &copy; {currentYear} {COMPANY_INFO.legalName}. Hak Cipta Dilindungi.
+        &copy; {currentYear} {COMPANY_INFO.legalName} (AMS Beton). Hak Cipta Dilindungi.
       </div>
       <div class="flex items-center space-x-2 text-[11px]">
+        <span>Acuan Standar Teknis:</span>
         <span>SNI 2847:2019</span>
         <span>•</span>
         <span>PBI 1971</span>

@@ -1,6 +1,6 @@
 ---
 import { COMPANY_INFO, CONCRETE_GRADES } from '../data/company';
-import { Phone, Mail, MapPin, Clock, MessageSquare, Calculator } from 'lucide-astro';
+import { Phone, MapPin, Clock, MessageSquare, Calculator, Copy, Check } from 'lucide-astro';
 
 const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURIComponent(COMPANY_INFO.whatsappMessage)}`;
 ---
@@ -15,7 +15,7 @@ const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURICom
           Konsultasi Kebutuhan Pengecoran
         </h2>
         <p class="text-xs sm:text-sm lg:text-base text-white/95 leading-relaxed mb-5 max-w-prose">
-          Diskusikan spesifikasi mutu beton, estimasi kubikasi, dan jadwal pengecoran langsung bersama tim technical sales CV Anugerah Mecca Sejahtera.
+          Diskusikan spesifikasi mutu beton, estimasi kubikasi, dan jadwal pengecoran langsung bersama tim CV Anugerah Mecca Sejahtera.
         </p>
 
         <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4">
@@ -26,7 +26,7 @@ const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURICom
             class="px-5 py-3 bg-industrial-950 hover:bg-industrial-900 text-white font-bold text-xs sm:text-sm rounded flex items-center justify-center space-x-2 transition-colors"
           >
             <MessageSquare class="w-4 h-4 text-emerald-400" />
-            <span>Chat via WhatsApp</span>
+            <span>Chat Langsung WhatsApp ({COMPANY_INFO.phoneFormatted})</span>
           </a>
 
           <a
@@ -34,7 +34,7 @@ const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURICom
             class="px-5 py-3 bg-white hover:bg-industrial-100 text-industrial-950 font-bold text-xs sm:text-sm rounded flex items-center justify-center space-x-2 transition-colors"
           >
             <Phone class="w-4 h-4 text-safety-600" />
-            <span>{COMPANY_INFO.phoneFormatted}</span>
+            <span>Telepon: {COMPANY_INFO.phoneFormatted}</span>
           </a>
         </div>
       </div>
@@ -43,10 +43,10 @@ const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURICom
     <!-- Section Heading for Form & Calculator -->
     <div id="penawaran" class="max-w-3xl mb-6 sm:mb-10 scroll-mt-20">
       <h2 class="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-industrial-950 mb-2">
-        Kalkulator Kubikasi & Penawaran
+        Kalkulator Kubikasi & Formulir Penawaran
       </h2>
       <p class="text-xs sm:text-sm lg:text-base text-industrial-700 leading-relaxed max-w-prose">
-        Hitung volume beton cor yang diperlukan dan buat rincian penawaran harga resmi.
+        Hitung volume beton cor yang diperlukan dan kirimkan rincian kebutuhan proyek Anda melalui WhatsApp resmi.
       </p>
     </div>
 
@@ -125,31 +125,36 @@ const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURICom
         </div>
 
         <!-- Official Quotation Form -->
-        <form id="quote-form" class="space-y-3 sm:space-y-4">
+        <form id="quote-form" class="space-y-3 sm:space-y-4" novalidate>
+          
+          <!-- Error & Notification Alert -->
+          <div id="form-error-msg" class="hidden text-xs text-red-700 bg-red-50 border border-red-200 p-2.5 rounded"></div>
+          <div id="form-success-msg" class="hidden text-xs text-emerald-700 bg-emerald-50 border border-emerald-200 p-2.5 rounded"></div>
+
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div>
               <label for="client-name" class="block text-[11px] sm:text-xs font-bold text-industrial-800 mb-1">
-                Nama Pemesan / PIC *
+                Nama Pemesan / PIC Proyek <span class="text-red-500">*</span>
               </label>
               <input 
                 type="text" 
                 id="client-name" 
                 required 
-                placeholder="Nama lengkap"
-                class="w-full px-3 py-2 bg-white border border-industrial-300 rounded text-xs sm:text-sm text-industrial-950 focus:outline-none focus:border-safety-600"
+                placeholder="Nama lengkap pemesan"
+                class="w-full px-3 py-2 bg-white border border-industrial-300 rounded text-xs sm:text-sm text-industrial-950 focus:outline-none focus:border-safety-600 transition-colors"
               />
             </div>
 
             <div>
               <label for="client-phone" class="block text-[11px] sm:text-xs font-bold text-industrial-800 mb-1">
-                No. WhatsApp / Telp *
+                Nomor WhatsApp / Telp <span class="text-red-500">*</span>
               </label>
               <input 
                 type="tel" 
                 id="client-phone" 
                 required 
                 placeholder="08xxxxxxxxxx"
-                class="w-full px-3 py-2 bg-white border border-industrial-300 rounded text-xs sm:text-sm text-industrial-950 focus:outline-none focus:border-safety-600"
+                class="w-full px-3 py-2 bg-white border border-industrial-300 rounded text-xs sm:text-sm text-industrial-950 focus:outline-none focus:border-safety-600 transition-colors"
               />
             </div>
           </div>
@@ -157,7 +162,7 @@ const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURICom
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div>
               <label for="concrete-grade-select" class="block text-[11px] sm:text-xs font-bold text-industrial-800 mb-1">
-                Pilihan Mutu Beton *
+                Pilihan Mutu Beton <span class="text-red-500">*</span>
               </label>
               <select 
                 id="concrete-grade-select" 
@@ -173,15 +178,15 @@ const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURICom
 
             <div>
               <label for="truck-type-select" class="block text-[11px] sm:text-xs font-bold text-industrial-800 mb-1">
-                Tipe Armada Pengiriman *
+                Tipe Armada Pengiriman <span class="text-red-500">*</span>
               </label>
               <select 
                 id="truck-type-select" 
                 class="w-full px-3 py-2 bg-white border border-industrial-300 rounded text-xs sm:text-sm text-industrial-950 focus:outline-none focus:border-safety-600"
               >
-                <option value="Truk Standar (7 m³)">Truk Standar 7 m³ (Jalan ≥ 3.5m)</option>
-                <option value="Truk MiniMix (3 m³)">Truk MiniMix 3 m³ (Akses 2.5 - 3m)</option>
-                <option value="Perlu Survey Lokasi">Perlu Survey Akses Dahulu</option>
+                <option value="Truk Standar (7 m³)">Truk Standar 7 m³ (Akses Jalan ≥ 3.5m)</option>
+                <option value="Truk MiniMix (3 m³)">Truk MiniMix 3 m³ (Akses Jalan 2.5 - 3m)</option>
+                <option value="Perlu Survey Akses Lokasi">Perlu Survey Akses Terlebih Dahulu</option>
               </select>
             </div>
           </div>
@@ -189,36 +194,36 @@ const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURICom
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div>
               <label for="pump-service" class="block text-[11px] sm:text-xs font-bold text-industrial-800 mb-1">
-                Sewa Pompa Beton (Concrete Pump)
+                Kebutuhan Pompa Beton (Concrete Pump)
               </label>
               <select 
                 id="pump-service" 
                 class="w-full px-3 py-2 bg-white border border-industrial-300 rounded text-xs sm:text-sm text-industrial-950 focus:outline-none focus:border-safety-600"
               >
-                <option value="Tidak Perlu (Curah Manual)">Tidak Perlu (Curah Manual)</option>
-                <option value="Sewa Pompa Standar (Boom 18m)">Pompa Standar (Boom 18m)</option>
-                <option value="Sewa Pompa Long Boom (Boom 28m)">Pompa Long Boom (Boom 28m)</option>
+                <option value="Tidak Perlu (Curah Manual / Talang)">Tidak Perlu (Curah Manual / Talang)</option>
+                <option value="Sewa Pompa Standar (Boom 18m)">Pompa Standar (Boom 18 meter)</option>
+                <option value="Sewa Pompa Long Boom (Boom 28m)">Pompa Long Boom (Boom 28 meter)</option>
                 <option value="Sewa Pompa Kodok / Pipa Darat">Pompa Kodok (Pipa Darat 50-150m)</option>
               </select>
             </div>
 
             <div>
               <label for="project-location" class="block text-[11px] sm:text-xs font-bold text-industrial-800 mb-1">
-                Lokasi Proyek / Kelurahan & Kota *
+                Lokasi Proyek / Kelurahan & Kota <span class="text-red-500">*</span>
               </label>
               <input 
                 type="text" 
                 id="project-location" 
                 required 
-                placeholder="Kelurahan, Kota"
-                class="w-full px-3 py-2 bg-white border border-industrial-300 rounded text-xs sm:text-sm text-industrial-950 focus:outline-none focus:border-safety-600"
+                placeholder="Nama jalan, kelurahan, kota"
+                class="w-full px-3 py-2 bg-white border border-industrial-300 rounded text-xs sm:text-sm text-industrial-950 focus:outline-none focus:border-safety-600 transition-colors"
               />
             </div>
           </div>
 
           <div>
             <label for="project-notes" class="block text-[11px] sm:text-xs font-bold text-industrial-800 mb-1">
-              Catatan Proyek
+              Catatan Proyek (Rencana Tanggal Pengecoran / Kesiapan Lokasi)
             </label>
             <textarea 
               id="project-notes" 
@@ -228,24 +233,25 @@ const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURICom
             ></textarea>
           </div>
 
-          <!-- Buttons -->
+          <!-- Action Buttons -->
           <div class="pt-2 flex flex-col sm:flex-row items-center gap-2.5">
             <button
               type="button"
               id="btn-send-whatsapp"
-              class="w-full sm:flex-1 py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm rounded flex items-center justify-center space-x-2 transition-colors"
+              class="w-full sm:flex-1 py-3 px-4 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-bold text-xs sm:text-sm rounded flex items-center justify-center space-x-2 transition-colors cursor-pointer"
             >
               <MessageSquare class="w-4 h-4" />
-              <span>Kirim via WhatsApp</span>
+              <span>Kirim Rincian via WhatsApp</span>
             </button>
 
             <button
               type="button"
-              id="btn-send-email"
-              class="w-full sm:w-auto py-2.5 px-4 bg-industrial-950 hover:bg-industrial-850 text-white font-bold text-xs sm:text-sm rounded flex items-center justify-center space-x-2 transition-colors"
+              id="btn-copy-quote"
+              class="w-full sm:w-auto py-3 px-4 bg-industrial-950 hover:bg-industrial-850 active:bg-industrial-800 text-white font-bold text-xs sm:text-sm rounded flex items-center justify-center space-x-2 transition-colors cursor-pointer"
             >
-              <Mail class="w-4 h-4 text-safety-500" />
-              <span>Format Email</span>
+              <Copy class="w-4 h-4 text-safety-500" id="copy-icon" />
+              <Check class="w-4 h-4 text-emerald-400 hidden" id="check-icon" />
+              <span id="copy-text">Salin Rincian</span>
             </button>
           </div>
         </form>
@@ -257,16 +263,16 @@ const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURICom
         
         <div class="p-4 sm:p-6 bg-industrial-950 text-white rounded-lg space-y-4">
           <div>
-            <span class="text-[11px] text-safety-500 font-bold block mb-0.5">Badan Hukum Resmi</span>
+            <span class="text-[11px] text-safety-500 font-bold block mb-0.5">Badan Hukum Usaha</span>
             <h3 class="text-lg sm:text-xl font-bold text-white">{COMPANY_INFO.legalName}</h3>
-            <span class="text-xs text-industrial-400 block mt-0.5">Brand Dagang: {COMPANY_INFO.brandName}</span>
+            <span class="text-xs text-industrial-400 block mt-0.5">{COMPANY_INFO.brandName}</span>
           </div>
 
           <div class="space-y-3 text-xs sm:text-sm text-industrial-300">
             <div class="flex items-start space-x-2.5">
               <Phone class="w-4 h-4 text-safety-500 shrink-0 mt-0.5" />
               <div>
-                <span class="block text-[11px] text-industrial-400">Telepon & Hotline Pengecoran</span>
+                <span class="block text-[11px] text-industrial-400">Kontak Resmi & WhatsApp</span>
                 <a href={`tel:${COMPANY_INFO.phone}`} class="font-bold text-white hover:text-safety-500 transition-colors text-sm">
                   {COMPANY_INFO.phoneFormatted}
                 </a>
@@ -274,19 +280,9 @@ const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURICom
             </div>
 
             <div class="flex items-start space-x-2.5">
-              <Mail class="w-4 h-4 text-safety-500 shrink-0 mt-0.5" />
-              <div>
-                <span class="block text-[11px] text-industrial-400">Email Resmi</span>
-                <a href={`mailto:${COMPANY_INFO.email}`} class="font-medium text-white hover:text-safety-500 transition-colors block text-xs">
-                  {COMPANY_INFO.email}
-                </a>
-              </div>
-            </div>
-
-            <div class="flex items-start space-x-2.5">
               <Clock class="w-4 h-4 text-safety-500 shrink-0 mt-0.5" />
               <div>
-                <span class="block text-[11px] text-industrial-400">Jam Operasional</span>
+                <span class="block text-[11px] text-industrial-400">Jam Operasional Layanan</span>
                 <p class="text-xs text-industrial-300 leading-relaxed mt-0.5">
                   {COMPANY_INFO.workingHours}
                 </p>
@@ -296,9 +292,9 @@ const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURICom
             <div class="flex items-start space-x-2.5">
               <MapPin class="w-4 h-4 text-safety-500 shrink-0 mt-0.5" />
               <div>
-                <span class="block text-[11px] text-industrial-400">Wilayah Layanan</span>
+                <span class="block text-[11px] text-industrial-400">Wilayah Jangkauan Pengiriman</span>
                 <p class="text-xs text-industrial-300 leading-relaxed mt-0.5">
-                  Jabodetabek (Jakarta, Bogor, Depok, Tangerang, Bekasi) dan Karawang.
+                  {COMPANY_INFO.officeAddress} (Jakarta, Bogor, Depok, Tangerang, Bekasi, dan Karawang).
                 </p>
               </div>
             </div>
@@ -310,19 +306,19 @@ const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURICom
           <div class="p-3 bg-white flex items-center justify-between text-xs font-bold text-industrial-950 border-b border-industrial-100">
             <div class="flex items-center space-x-1.5">
               <MapPin class="w-3.5 h-3.5 text-safety-600" />
-              <span>Lokasi Batching Plant & Operasional</span>
+              <span>Wilayah Operasional (Jabodetabek & Sekitarnya)</span>
             </div>
-            <span class="text-[11px] text-industrial-500 font-normal">Google Maps</span>
+            <span class="text-[11px] text-industrial-500 font-normal">Peta Referensi</span>
           </div>
           
           <div class="relative h-48 sm:h-56 w-full">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126915.4055276537!2d106.915494!3d-6.241586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698c6900964f6b%3A0x948338e3d922b260!2sBekasi%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid" 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d507663.2642848574!2d106.58804797086053!3d-6.284795777491475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698c6900964f6b%3A0x948338e3d922b260!2sBekasi%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid" 
               class="w-full h-full border-0" 
               allowfullscreen="" 
               loading="lazy" 
               referrerpolicy="no-referrer-when-downgrade"
-              title="Lokasi Operasional AMS Beton CV Anugerah Mecca Sejahtera"
+              title="Wilayah Operasional AMS Beton"
             ></iframe>
           </div>
         </div>
@@ -371,39 +367,119 @@ const waLink = `https://wa.me/${COMPANY_INFO.whatsappNumber}?text=${encodeURICom
     thickInput.addEventListener('input', updateCalculator);
   }
 
+  // Helper: validate and build message
+  function getValidatedData() {
+    const nameInput = document.getElementById('client-name') as HTMLInputElement | null;
+    const phoneInput = document.getElementById('client-phone') as HTMLInputElement | null;
+    const locationInput = document.getElementById('project-location') as HTMLInputElement | null;
+    const gradeSelect = document.getElementById('concrete-grade-select') as HTMLSelectElement | null;
+    const truckSelect = document.getElementById('truck-type-select') as HTMLSelectElement | null;
+    const pumpSelect = document.getElementById('pump-service') as HTMLSelectElement | null;
+    const notesInput = document.getElementById('project-notes') as HTMLTextAreaElement | null;
+    const errorMsg = document.getElementById('form-error-msg');
+
+    const name = nameInput?.value.trim() || '';
+    const phone = phoneInput?.value.trim() || '';
+    const location = locationInput?.value.trim() || '';
+    const grade = gradeSelect?.value || 'K-250';
+    const truck = truckSelect?.value || 'Truk Standar (7 m³)';
+    const pump = pumpSelect?.value || 'Tidak Perlu (Curah Manual / Talang)';
+    const notes = notesInput?.value.trim() || '-';
+    const volume = document.getElementById('calc-result-volume')?.textContent || '0';
+
+    // Reset input borders
+    if (nameInput) nameInput.classList.remove('border-red-500');
+    if (phoneInput) phoneInput.classList.remove('border-red-500');
+    if (locationInput) locationInput.classList.remove('border-red-500');
+    if (errorMsg) {
+      errorMsg.classList.add('hidden');
+      errorMsg.textContent = '';
+    }
+
+    // Validation checks
+    const missing: string[] = [];
+    if (!name) {
+      missing.push('Nama Pemesan');
+      nameInput?.classList.add('border-red-500');
+    }
+    if (!phone) {
+      missing.push('Nomor WhatsApp');
+      phoneInput?.classList.add('border-red-500');
+    }
+    if (!location) {
+      missing.push('Lokasi Proyek');
+      locationInput?.classList.add('border-red-500');
+    }
+
+    if (missing.length > 0) {
+      if (errorMsg) {
+        errorMsg.textContent = `Mohon lengkapi data wajib berikut: ${missing.join(', ')}.`;
+        errorMsg.classList.remove('hidden');
+      }
+      return null;
+    }
+
+    const message = `Halo AMS Beton (CV Anugerah Mecca Sejahtera),\n\nSaya ingin meminta informasi penawaran harga beton cor ready mix:\n\n- Nama Pemesan / PIC: ${name}\n- No. Kontak: ${phone}\n- Lokasi Proyek: ${location}\n- Mutu Beton: ${grade}\n- Estimasi Volume: ${volume} m³\n- Pilihan Armada: ${truck}\n- Sewa Pompa Beton: ${pump}\n- Catatan Tambahan: ${notes}\n\nMohon informasi ketersediaan jadwal pengiriman dan estimasi penawaran harga. Terima kasih.`;
+
+    return { message, name, phone, location, grade, volume };
+  }
+
   // Handle WhatsApp submission button
   const btnSendWhatsapp = document.getElementById('btn-send-whatsapp');
   if (btnSendWhatsapp) {
     btnSendWhatsapp.addEventListener('click', () => {
-      const name = (document.getElementById('client-name') as HTMLInputElement)?.value.trim() || 'Pelanggan';
-      const phone = (document.getElementById('client-phone') as HTMLInputElement)?.value.trim() || '-';
-      const grade = (document.getElementById('concrete-grade-select') as HTMLSelectElement)?.value || 'K-250';
-      const truck = (document.getElementById('truck-type-select') as HTMLSelectElement)?.value || 'Truk Standar';
-      const pump = (document.getElementById('pump-service') as HTMLSelectElement)?.value || '-';
-      const location = (document.getElementById('project-location') as HTMLInputElement)?.value.trim() || '-';
-      const notes = (document.getElementById('project-notes') as HTMLTextAreaElement)?.value.trim() || '-';
-      const volume = document.getElementById('calc-result-volume')?.textContent || '0';
+      const data = getValidatedData();
+      if (!data) return;
 
-      const message = `Halo AMS Beton (CV Anugerah Mecca Sejahtera),\n\nSaya ingin meminta penawaran harga beton cor ready mix:\n\n- Nama PIC: ${name}\n- No. Kontak: ${phone}\n- Lokasi Proyek: ${location}\n- Mutu Beton: ${grade}\n- Estimasi Volume: ${volume} m³\n- Tipe Armada: ${truck}\n- Sewa Pompa Beton: ${pump}\n- Catatan Tambahan: ${notes}\n\nMohon informasi jadwal pengiriman dan estimasi penawaran harga resmi. Terima kasih.`;
-
-      const targetUrl = `https://wa.me/6281288997600?text=${encodeURIComponent(message)}`;
+      const targetUrl = `https://wa.me/6281235532223?text=${encodeURIComponent(data.message)}`;
       window.open(targetUrl, '_blank');
     });
   }
 
-  // Handle Email submission button
-  const btnSendEmail = document.getElementById('btn-send-email');
-  if (btnSendEmail) {
-    btnSendEmail.addEventListener('click', () => {
-      const name = (document.getElementById('client-name') as HTMLInputElement)?.value.trim() || 'Pelanggan';
-      const grade = (document.getElementById('concrete-grade-select') as HTMLSelectElement)?.value || 'K-250';
-      const location = (document.getElementById('project-location') as HTMLInputElement)?.value.trim() || 'Jabodetabek';
-      const volume = document.getElementById('calc-result-volume')?.textContent || '0';
+  // Handle Copy Quotation button
+  const btnCopy = document.getElementById('btn-copy-quote');
+  const copyIcon = document.getElementById('copy-icon');
+  const checkIcon = document.getElementById('check-icon');
+  const copyText = document.getElementById('copy-text');
+  const successMsg = document.getElementById('form-success-msg');
 
-      const subject = `Permintaan Penawaran Beton Cor ${grade} - ${name} (${location})`;
-      const body = `Yth. Tim Penawaran CV Anugerah Mecca Sejahtera (AMS Beton),\n\nMohon dikirimkan surat penawaran harga resmi untuk proyek kami:\n- Nama Pemesan: ${name}\n- Lokasi: ${location}\n- Mutu Beton: ${grade}\n- Estimasi Kebutuhan: ${volume} m³\n\nTerima kasih.`;
+  if (btnCopy) {
+    btnCopy.addEventListener('click', async () => {
+      const data = getValidatedData();
+      if (!data) return;
 
-      window.location.href = `mailto:penawaran@amsbeton.co.id?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      try {
+        await navigator.clipboard.writeText(data.message);
+        if (copyIcon && checkIcon && copyText) {
+          copyIcon.classList.add('hidden');
+          checkIcon.classList.remove('hidden');
+          copyText.textContent = 'Tersalin!';
+        }
+        if (successMsg) {
+          successMsg.textContent = '✓ Rincian penawaran berhasil disalin ke clipboard!';
+          successMsg.classList.remove('hidden');
+          setTimeout(() => {
+            successMsg.classList.add('hidden');
+            if (copyIcon && checkIcon && copyText) {
+              copyIcon.classList.remove('hidden');
+              checkIcon.classList.add('hidden');
+              copyText.textContent = 'Salin Rincian';
+            }
+          }, 3500);
+        }
+      } catch (err) {
+        // Fallback for clipboard
+        const textarea = document.createElement('textarea');
+        textarea.value = data.message;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        if (successMsg) {
+          successMsg.textContent = '✓ Rincian penawaran berhasil disalin ke clipboard!';
+          successMsg.classList.remove('hidden');
+        }
+      }
     });
   }
 </script>
